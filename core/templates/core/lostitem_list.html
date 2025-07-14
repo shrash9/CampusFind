@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Lost Items</h2>
+  <a href="{% url 'lostitem_report' %}">Report Lost Item</a>
+  <ul>
+    {% for item in object_list %}
+      <li>
+        <a href="{% url 'lostitem_detail' item.pk %}">{{ item.title }}</a>
+        - {{ item.location }} - {{ item.date_lost }}
+      </li>
+    {% empty %}
+      <li>No lost items found.</li>
+    {% endfor %}
+  </ul>
+
+  {% if is_paginated %}
+    <div>
+      {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+      {% endif %}
+      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+      {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Next</a>
+      {% endif %}
+    </div>
+  {% endif %}
+{% endblock %}

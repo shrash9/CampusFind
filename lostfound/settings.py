@@ -79,7 +79,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "lostfound.wsgi.application"
-
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+ACCOUNT_EMAIL_VERIFICATION='none'
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
@@ -142,7 +143,7 @@ ACCOUNT_LOGIN_METHODS = {"email", "username"}
 
 ACCOUNT_SIGNUP_FIELDS = ["email*", "username*", "password1*", "password2*"]
 
-ACCOUNT_EMAIL_VERIFICATION = "mandatory"
-
+ACCOUNT_EMAIL_VERIFICATION = "none"
+ACCOUNT_EMAIL_REQUIRED = False
 LOGIN_REDIRECT_URL = "/"
 ACCOUNT_LOGOUT_REDIRECT_URL = "/"

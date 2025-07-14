@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>{{ object.title }}</h2>
+  <p><strong>Description:</strong> {{ object.description }}</p>
+  <p><strong>Location:</strong> {{ object.location }}</p>
+  <p><strong>Date Lost:</strong> {{ object.date_lost }}</p>
+  <p><strong>Status:</strong> {{ object.get_status_display }}</p>
+  <p><strong>Reported By:</strong> {{ object.reporter.username }}</p>
+  {% if object.photo %}
+    <img src="{{ object.photo.url }}" alt="{{ object.title }}" style="max-width:400px;">
+  {% endif %}
+  <a href="{% url 'lostitem_list' %}">Back to list</a>
+{% endblock %}
