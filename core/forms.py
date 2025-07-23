@@ -14,4 +14,10 @@ class LostItemForm(forms.ModelForm):
 class ClaimForm(forms.ModelForm):
     class Meta:
         model = Claim
-        fields = ['description', 'photo']
+        fields = ['description',
+            'photo',
+            'proof',
+            'last_seen_location',
+            'unique_marking',
+            'contents_description',
+        ]

@@ -8,4 +8,11 @@
   {% if object.photo %}
     <img src="{{ object.photo.url }}" alt="Claim photo" style="max-width:400px;">
   {% endif %}
+  {% if object.proof %}
+    <h4>Proof of Ownership</h4>
+    <img src="{{ object.proof.url }}" alt="Proof photo" style="max-width:400px;">
+  {% endif %}
+  <p><strong>Last Seen Location:</strong> {{ object.last_seen_location }}</p>
+  <p><strong>Unique Marking:</strong> {{ object.unique_marking }}</p>
+  <p><strong>Contents Description:</strong> {{ object.contents_description }}</p>
 {% endblock %}

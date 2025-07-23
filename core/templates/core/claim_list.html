@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>My Claims</h2>
+  <ul>
+    {% for claim in object_list %}
+      <li>
+        <a href="{% url 'claim_detail' claim.pk %}">{{ claim.lost_item.title }}</a>
+        - Status: {{ claim.get_status_display }} - Submitted: {{ claim.submitted_at|date:"SHORT_DATE_FORMAT" }}
+      </li>
+    {% empty %}
+      <li>You have not submitted any claims yet.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

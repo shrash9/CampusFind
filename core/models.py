@@ -33,6 +33,10 @@ class Claim(models.Model):
     photo = models.ImageField(upload_to='claim_photos/', blank=True, null=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
     submitted_at = models.DateTimeField(auto_now_add=True)
+    proof = models.ImageField(upload_to='claim_proofs/', blank=True, null=True)
+    last_seen_location = models.CharField(max_length=255, blank=True)
+    unique_marking = models.CharField(max_length=255, blank=True)
+    contents_description = models.TextField(blank=True)
 
     def __str__(self):
         return f"Claim by {self.claimant.username} on {self.lost_item.title}"
