@@ -1,13 +1,23 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 
 {% block content %}
   <h2>Lost Items</h2>
+
+  <form method="get">
+    {{ filter.form|crispy }}
+    <button type="submit">Filter</button>
+  </form>
+
   <a href="{% url 'lostitem_report' %}">Report Lost Item</a>
   <ul>
     {% for item in object_list %}
       <li>
-        <a href="{% url 'lostitem_detail' item.pk %}">{{ item.title }}</a>
-        - {{ item.location }} - {{ item.date_lost }}
+        <a href="{% url 'lostitem_detail' item.pk %}">{{ item.title }}</a> - {{ item.location }} - {{ item.date_lost }}
+        {% if user.is_authenticated and item.reporter == user %}
+          | <a href="{% url 'lostitem_edit' item.pk %}">Edit</a>
+          | <a href="{% url 'lostitem_delete' item.pk %}">Delete</a>
+        {% endif %}
       </li>
     {% empty %}
       <li>No lost items found.</li>

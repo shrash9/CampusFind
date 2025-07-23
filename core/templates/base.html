@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Lost and Found Campus Portal</title>
+</head>
+<body>
+    <header>
+        <h1><a href="{% url 'home' %}">Lost and Found Campus Portal</a></h1>
+        <nav>
+            {% if user.is_authenticated %}
+                Welcome, {{ user.username }} |
+                <a href="{% url 'account_logout' %}">Logout</a>
+            {% else %}
+                <a href="{% url 'account_login' %}">Login</a> |
+                <a href="{% url 'account_signup' %}">Sign Up</a>
+            {% endif %}
+        </nav>
+        <hr />
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <hr />
+        <p>© 2025 Lost and Found Campus Portal</p>
+    </footer>
+</body>
+</html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{% comment %} <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,4 +12,38 @@
         <p><a href="{% url 'account_login' %}">Login</a> or <a href="{% url 'account_signup' %}">Sign up</a></p>
     {% endif %}
 </body>
-</html>
+</html> {% endcomment %}
+
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <h1>Lost Items</h1>
+  <a href="{% url 'lostitem_report' %}">Report Lost Item</a>
+  <ul>
+    {% for item in object_list %}
+      <li>
+        <a href="{% url 'lostitem_detail' item.pk %}">{{ item.title }}</a>
+        - {{ item.location }} - {{ item.date_lost }}
+        {% if user.is_authenticated and item.reporter == user %}
+          | <a href="{% url 'lostitem_edit' item.pk %}">Edit</a>
+          | <a href="{% url 'lostitem_delete' item.pk %}">Delete</a>
+        {% endif %}
+      </li>
+    {% empty %}
+      <li>No lost items found.</li>
+    {% endfor %}
+  </ul>
+
+  {% if is_paginated %}
+    <div>
+      {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+      {% endif %}
+      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+      {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Next</a>
+      {% endif %}
+    </div>
+  {% endif %}
+{% endblock %}
