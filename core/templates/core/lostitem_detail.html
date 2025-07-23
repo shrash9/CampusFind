@@ -10,5 +10,6 @@
   {% if object.photo %}
     <img src="{{ object.photo.url }}" alt="{{ object.title }}" style="max-width:400px;">
   {% endif %}
+  <a href="{% url 'claim_submit' object.pk %}">Submit a Claim for this Item</a>
   <a href="{% url 'lostitem_list' %}">Back to list</a>
 {% endblock %}

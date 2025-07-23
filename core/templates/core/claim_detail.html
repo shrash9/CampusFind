@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Claim for: {{ object.lost_item.title }}</h2>
+  <p><strong>Description:</strong> {{ object.description }}</p>
+  <p><strong>Status:</strong> {{ object.get_status_display }}</p>
+  <p><strong>Submitted at:</strong> {{ object.submitted_at|date:"SHORT_DATETIME_FORMAT" }}</p>
+  {% if object.photo %}
+    <img src="{{ object.photo.url }}" alt="Claim photo" style="max-width:400px;">
+  {% endif %}
+{% endblock %}
